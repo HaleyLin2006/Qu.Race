@@ -20,30 +20,16 @@ class Button():
         self.msg_img_rect = self.msg_img.get_rect()
         self.msg_img_rect.center = self.rect.center
     
-    def draw_button(self, screen):
-        pygame.draw.rect(screen, self.bg_color, self.rect)
+    def draw_button(self):
+        pygame.draw.rect(self.screen, self.bg_color, self.rect)
         self.screen.blit(self.msg_img, self.msg_img_rect)
 
-#Problem!!!! Not working
     def mouse_is_over(self):
-        Mouse_x, Mouse_y = pygame.mouse.get_pos()
-        x, y = self.rect.center
-        #Half way distance of button
-        edge_x, edge_y = (self.width//2), (self.height//2)
-        #Mouse in the button --> Turn whiter
-        if (x-edge_x < Mouse_x and x+edge_x > Mouse_x) and (y-edge_y < Mouse_y and y+edge_y > Mouse_y):
-            Color_Code = [i for i in self.bg_color]
-            self.bg_color = (Color_Code[0]+100, Color_Code[1]+100, Color_Code+100)
+        Mouse = pygame.mouse.get_pos()
+        if self.msg_img_rect.collidepoint(Mouse):
             return True
         else:
             return False
     
-    def mouse_clicked(self):
-        if self.mouse_is_over():
-            pygame.event.get()
-            if pygame.mouse.get_pressed():
-                return True
-        else:
-            return False
 
 
